@@ -55,6 +55,8 @@ export const SchedulePage = () => {
         navigate(`./form`);
     };
 
+    console.log(schedules.length);
+
     return (
         <>
             <Loading loading={loading}>
@@ -73,7 +75,7 @@ export const SchedulePage = () => {
                                 スケジュールを追加する
                             </PositiveButton>
                         </div>
-                        <div className='shadow-sm'>
+                        <div className='shadow-sm pb-4'>
                             <Calendar
                                 events={schedules.map((schedule) => ({
                                     id: schedule.sid,
@@ -86,7 +88,7 @@ export const SchedulePage = () => {
                                 onEventClick={handleEventClick}
                             />
                         </div>
-                        <div className='py-4'>
+                        <div className={`py-4 ${schedules.length > 20 ? 'overflow-y-scroll max-h-96' : ''}`}>
                             <EventInfoTable navigate={navigateToForm} />
                         </div>
                         <FAB isOpenFAB={isOpenFAB} onClose={toggleFAB}>

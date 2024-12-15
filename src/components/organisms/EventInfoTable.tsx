@@ -9,13 +9,11 @@ import CircleIcon from '../image/CircleIcon';
 type ScheduleColumn = {
     schedule: React.JSX.Element;
     event: React.JSX.Element;
-    item: React.JSX.Element;
 };
 
 const tableColumns: Column<ScheduleColumn>[] = [
-    { header: '内容', accessor: 'schedule' },
-    { header: '金額', accessor: 'event' },
-    { header: '削除', accessor: 'item' },
+    { header: '', accessor: 'schedule' },
+    { header: '', accessor: 'event' },
 ];
 
 type Props = {
@@ -68,18 +66,20 @@ export const EventInfoTable: React.FC<Props> = ({ navigate }) => {
                 columns={tableColumns}
                 data={sortedSchedules.map(schedule => ({
                     schedule: (
-                        <div className='text-left'>
+                        <div
+                            className="text-left cursor-pointer"
+                            onClick={() => navigate(schedule)} // リスト全体で画面遷移
+                        >
                             <div className="flex flex-row max-w-md">
                                 {schedule.date.start !== schedule.date.end ? (
                                     <>
-                                        <p className="">
+                                        <p>
                                             {`${new Date(schedule.date.start).toLocaleDateString('ja-JP', { month: 'long', day: 'numeric' })}～${new Date(schedule.date.end).toLocaleDateString('ja-JP', { month: 'long', day: 'numeric' })}`}
                                         </p>
                                     </>
                                 ) : (
                                     <>
                                         <p>{new Date(schedule.date.start).toLocaleDateString('ja-JP', { month: 'long', day: 'numeric' })}</p>
-
                                         <div className="ml-1 leading-[1.4rem] text-gray-400 max-w-sm">
                                             {!schedule.allDay ? (
                                                 <p>{`(${schedule.time.start}～${schedule.time.end})`}</p>
@@ -90,36 +90,25 @@ export const EventInfoTable: React.FC<Props> = ({ navigate }) => {
                                     </>
                                 )}
                             </div>
-                            <div className='flex flex-row flex-wrap'>
+                            <div className="flex flex-row flex-wrap">
                                 <div className="mt-1 flex flex-row mr-1.5">
                                     <CircleIcon className={`${schedule.category.categoryColor.text}`} />
                                 </div>
-                                <div className=''>
+                                <div>
                                     {schedule.contentURL !== "" ? (
-                                        <button
-                                            className='text-blue-800 underline cursor-pointer'
-                                            onClick={() => handleLinkClick(schedule.contentURL)}
-                                        >
-                                            <div className='items-center flex flex-row'>
-                                                <p>{`${schedules.find(event => event.sid === schedule.sid)?.content || "no title"}`}</p>
-                                            </div>
-                                        </button>
+                                        <span className="text-blue-800 underline">
+                                            {schedule.content || "no title"}
+                                        </span>
                                     ) : (
-                                        <p>{`${schedules.find(event => event.sid === schedule.sid)?.content || "no title"}`}</p>
-                                    )
-                                    }
+                                        <span>{schedule.content || "no title"}</span>
+                                    )}
                                 </div>
                             </div>
-                        </div >
+                        </div>
                     ),
                     event: (
                         <div className="text-right space-y-1 max-w-md">
                             <p className="text-xs leading-tight text-gray-400 max-w-sm"></p>
-                        </div>
-                    ),
-                    item: (
-                        <div>
-                            <button className='mr-4' onClick={() => navigate(schedule)}><EditPenIcon /></button>
                         </div>
                     ),
                 }))}

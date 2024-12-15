@@ -17,7 +17,7 @@ export const Table = <T,>({ columns, data }: TableProps<T>) => {
                 <div className="overflow-hidden">
                     <table className="min-w-full text-left">
                         <thead></thead>
-                        <tbody className="">
+                        <tbody >
                             {data.map((row, rowIndex) => (
                                 <tr
                                     key={rowIndex}
