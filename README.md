@@ -1,6 +1,7 @@
 # PlanTrek
 
-**PlanTrek**は、シンプルかつ直感的にカレンダーを共有できるウェブアプリケーションです。特に同好会やサークルの幹事の皆さんに最適なツールです。Apple や Android のネイティブアプリをインストールする必要なく、簡単にスケジュール共有が可能です。
+**PlanTrek**は、シンプルかつ直感的にカレンダーを共有できるウェブアプリケーションです。
+特に同好会やサークルの幹事の皆さんに最適なツールです。Apple や Android のネイティブアプリをインストールする必要なく、簡単にスケジュール共有が可能です。
 
 ## 主な機能
 
@@ -13,7 +14,7 @@
 - **フロントエンド**: React, TypeScript, TailwindCSS
 - **カレンダー管理**: FullCalendar
 - **バックエンド**: Firebase
-- **その他**: date-fns, lodash, react-select, react-tooltip
+- **その他**: date-fns, lodash, react-select
 
 ## セットアップ
 
