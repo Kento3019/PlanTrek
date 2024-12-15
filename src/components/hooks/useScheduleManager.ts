@@ -6,7 +6,6 @@ import { useParams } from "react-router-dom";
 import { useSchedules } from "../provider/SchedulesProvider";
 import { Schedule } from "../types/Schedule";
 
-
 export const useScheduleManager = () => {
     const { createDocument, readDocuments, updateDocument, deleteDocument } = useFirestore<Schedule>();
     const { uuid } = useParams();
@@ -16,11 +15,6 @@ export const useScheduleManager = () => {
     const createSchedule = (schedule: Schedule) => {
         createDocument(collectionRef, schedule.sid, schedule);
     }
-
-    // const createTransaction = (transaction: Transaction) => {
-    //     data.forEach((transaction) => createDocument(collectionRef, transaction.tid, transaction));
-    // }
-
 
     const readSchedule = async (): Promise<Schedule[]> => {
         const result = await readDocuments(collectionRef);

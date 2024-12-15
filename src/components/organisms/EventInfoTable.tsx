@@ -28,15 +28,22 @@ export const EventInfoTable: React.FC<Props> = ({ navigate }) => {
 
     useEffect(() => {
         const sorted = [...schedules].sort((a, b) => {
-            // 日付が異なる場合は日付でソート
-            if (a.date !== b.date) {
-                return a.date > b.date ? 1 : -1;
+            // 日付の開始時刻を比較 (昇順)
+            const dateA = new Date(a.date.start);
+            const dateB = new Date(b.date.start);
+            if (dateA.getTime() !== dateB.getTime()) {
+                return dateA.getTime() - dateB.getTime();
             }
-            // 日付が同じ場合は開始時間でソート
-            return a.time.start > b.time.start ? 1 : -1;
+
+            // 日付が同じ場合は開始時間を比較
+            const timeA = new Date(`1970-01-01T${a.time.start}:00Z`);
+            const timeB = new Date(`1970-01-01T${b.time.start}:00Z`);
+            return timeA.getTime() - timeB.getTime();
         });
+
         setSortedSchedules(sorted);  // 並び替えたデータをセット
     }, [schedules]);
+
 
 
     const [isOpen, setIsOpen] = useState(false);
