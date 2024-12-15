@@ -1,0 +1,108 @@
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN",
+    "Hiragino Sans", Meiryo, sans-serif;
+  --tw-bg-opacity: 1;
+  background-color: rgb(226 232 240 / var(--tw-bg-opacity));
+}
+.fc .fc-toolbar.fc-header-toolbar {
+  margin-bottom: 0;
+}
+.fc .fc-toolbar-title {
+  font-size: 1rem;
+  color: #37362f;
+}
+.fc .fc-button-primary {
+  font-size: 0.75rem;
+  background-color: #ffffff00;
+  color: #acaba9;
+  border: none;
+  outline: none;
+}
+.fc .fc-today-button {
+  background-color: #ffffff00;
+  color: #37362f;
+  border: none;
+  outline: none;
+}
+.fc .fc-button-primary:not(:disabled):active,
+.fc .fc-button-primary:not(:disabled).fc-button-active {
+  background-color: #ffffff00;
+  color: #acaba9;
+  box-shadow: none;
+}
+.fc .fc-button-primary:not(:disabled):focus,
+.fc .fc-button-primary:not(:disabled).fc-button-focus {
+  background-color: #ffffff00;
+  color: #acaba9;
+  box-shadow: none;
+}
+.fc .fc-today-button:disabled {
+  opacity: 1;
+}
+.fc .fc-col-header-cell {
+  font-size: 0.75rem;
+  font-weight: normal;
+  color: #b6b5b3;
+  border: none;
+}
+.fc .fc-scrollgrid {
+  border-width: 0;
+}
+
+.fc .fc-scrollgrid-section > * {
+  border: none;
+}
+
+.fc .fc-scrollgrid-sync-table {
+  border: 1px;
+}
+.fc .fc-daygrid-day-number {
+  font-size: 0.75rem;
+}
+.fc-event,
+.fc-daygrid-event {
+  background-color: transparent !important;
+  border: none !important; /* 枠線も消す */
+}
+.fc {
+  z-index: 1; /* モーダルの背景より後ろに配置 */
+}
+.fc-scroller {
+  overflow: hidden !important;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="time"]::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
+select,
+input[type="date"],
+input[type="time"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  appearance: none;
+  background-color: transparent;
+  text-align: left;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+input[type="text"],
+input[type="number"] {
+  -webkit-border-radius: 0;
+  background-color: transparent;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}

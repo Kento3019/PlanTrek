@@ -1,0 +1,4 @@
+/** 開発中はCDNを使う */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
