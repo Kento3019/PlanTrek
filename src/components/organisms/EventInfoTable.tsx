@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { EditPenIcon } from '../image/EditPenIcon';
 import { Column, Table } from '../molcules/Table';
 import { useSchedules } from '../provider/SchedulesProvider';
 import { Schedule } from '../types/Schedule';
@@ -45,12 +44,7 @@ export const EventInfoTable: React.FC<Props> = ({ navigate }) => {
 
 
     const [isOpen, setIsOpen] = useState(false);
-    const [selectedURL, setSelectedURL] = useState<string>('');
-
-    const handleLinkClick = (url: string) => {
-        setSelectedURL(url);  // 選択されたURLを保存
-        setIsOpen(true);  // モーダルを開く
-    };
+    const [selectedURL,] = useState<string>('');
 
     const handleModalAction = () => {
         // OKボタンがクリックされた場合に新規タブで遷移
@@ -91,7 +85,7 @@ export const EventInfoTable: React.FC<Props> = ({ navigate }) => {
                                 )}
                             </div>
                             <div className="flex flex-row flex-wrap">
-                                <div className="mt-1 flex flex-row mr-1.5">
+                                <div className="flex flex-row mr-1.5">
                                     <CircleIcon className={`${schedule.category.categoryColor.text}`} />
                                 </div>
                                 <div>

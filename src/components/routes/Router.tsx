@@ -14,6 +14,7 @@ import { ExpenseTransactionsProvider } from '../provider/ExpenseTransactionProvi
 import { SchedulesProvider } from '../provider/SchedulesProvider';
 import { ScheduleFormPage } from '../Pages/ScheduleFormPage';
 import { TransactionFormPage } from '../Pages/TransactionFormPage';
+import { HeaderProvider } from '../provider/HeaderProvider';
 
 export const Router = () => {
 
@@ -33,43 +34,47 @@ export const Router = () => {
                 <CategoriesProvider>
                     <SchedulesProvider>
                         <ExpenseTransactionsProvider>
-                            <ScrollToTop />
-                            <Routes>
-                                <Route path="/" element={<PageTemplate><HomePage /></PageTemplate>} />
-                                <Route path="/new" element={<PageTemplate><UserGroupPage /></PageTemplate>} />
-                                <Route path="/:uuid/user" element={<PageTemplate><UserGroupPage /></PageTemplate>} />
-                                <Route path="/:uuid/group" element={<PageTemplate><LinkCreationPage /></PageTemplate>} />
-                                <Route path="/:uuid/schedule" element={
-                                    <PageTemplate>
-                                        <SchedulePage />
-                                    </PageTemplate>
-                                }></Route>
-                                <Route path="/:uuid/schedule/form" element={
-                                    <PageTemplate>
-                                        <ScheduleFormPage />
-                                    </PageTemplate>
-                                }></Route>
-                                <Route path="/:uuid/schedule/category" element={
-                                    <PageTemplate>
-                                        <CategoryUpdatePage />
-                                    </PageTemplate>
-                                }></Route>
-                                <Route path="/:uuid/transaction" element={
-                                    <PageTemplate>
-                                        <TransactionManagementPage />
-                                    </PageTemplate>
-                                }></Route>
-                                <Route path="/:uuid/transaction/overview" element={
-                                    <PageTemplate>
-                                        <LedgerOverviewPage />
-                                    </PageTemplate>
-                                }></Route>
-                                <Route path="/:uuid/transaction/form" element={
-                                    <PageTemplate>
-                                        <TransactionFormPage />
-                                    </PageTemplate>
-                                }></Route>
-                            </Routes >
+                            <HeaderProvider>
+                                <ScrollToTop />
+                                <Routes>
+                                    <Route path="/" element={<PageTemplate><HomePage /></PageTemplate>} />
+                                    <Route path="/new" element={<PageTemplate><UserGroupPage /></PageTemplate>} />
+                                    <Route path="/:uuid/user" element={<PageTemplate><UserGroupPage /></PageTemplate>} />
+                                    <Route path="/:uuid/group" element={<PageTemplate><LinkCreationPage /></PageTemplate>} />
+                                    <Route path="/:uuid/schedule" element={
+                                        <div className="flex flex-col">
+                                            <PageTemplate>
+                                                <SchedulePage />
+                                            </PageTemplate>
+                                        </div>
+                                    }></Route>
+                                    <Route path="/:uuid/schedule/form" element={
+                                        <PageTemplate>
+                                            <ScheduleFormPage />
+                                        </PageTemplate>
+                                    }></Route>
+                                    <Route path="/:uuid/schedule/category" element={
+                                        <PageTemplate>
+                                            <CategoryUpdatePage />
+                                        </PageTemplate>
+                                    }></Route>
+                                    <Route path="/:uuid/transaction" element={
+                                        <PageTemplate>
+                                            <TransactionManagementPage />
+                                        </PageTemplate>
+                                    }></Route>
+                                    <Route path="/:uuid/transaction/overview" element={
+                                        <PageTemplate>
+                                            <LedgerOverviewPage />
+                                        </PageTemplate>
+                                    }></Route>
+                                    <Route path="/:uuid/transaction/form" element={
+                                        <PageTemplate>
+                                            <TransactionFormPage />
+                                        </PageTemplate>
+                                    }></Route>
+                                </Routes >
+                            </HeaderProvider>
                         </ExpenseTransactionsProvider>
                     </SchedulesProvider>
                 </CategoriesProvider>

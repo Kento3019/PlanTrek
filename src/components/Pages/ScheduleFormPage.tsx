@@ -43,14 +43,14 @@ export const ScheduleFormPage = memo(() => {
     }
     const renderInputs = () => (
         <>
-            <div className='space-y-4 mt-4'>
+            <div className='space-y-4 mt-1'>
                 <FormInput
                     type="text"
                     placeholder={PLACEHOLDER_CONTENT}
                     name={NAME_CONTENT} // NAME_CONTENTを設定
                     value={formData.content}
                     onChange={handleFormFieldChange}
-                    className="p-3 w-full mb-2"
+                    className="p-3 w-full"
                 />
                 <div className="flex flex-row items-center pr-2">
                     <p className="flex-grow text-left">終日</p>
@@ -60,8 +60,8 @@ export const ScheduleFormPage = memo(() => {
                         name={NAME_ALLDAY}
                     />
                 </div>
-                <div className="flex flex-col gap-4 pr-2">
-                    <div className="flex flex-row items-center gap-4">
+                <div className="flex flex-col gap-2 pr-2">
+                    <div className="flex flex-row items-center gap-2">
                         {/* ラベル「開始」を横いっぱいに広げる */}
                         <p className="flex-grow text-left">開始</p>
                         {/* 入力フィールド */}
@@ -91,7 +91,7 @@ export const ScheduleFormPage = memo(() => {
                             )}
                         </div>
                     </div>
-                    <div className="flex flex-row items-center gap-4">
+                    <div className="flex flex-row items-center gap-2">
                         {/* ラベル「開始」を横いっぱいに広げる */}
                         <p className="flex-grow text-left">終了</p>
 
@@ -149,7 +149,7 @@ export const ScheduleFormPage = memo(() => {
                                 className="p-3 w-full"
                             />
                         </div>
-                        <div className='flex flex-row items-center  gap-2 mb-2 ml-2'>
+                        <div className='flex flex-row items-center  gap-2 ml-2'>
                             <TagIcon />
                             <div className="w-full">
                                 <FormSelect
@@ -202,7 +202,7 @@ export const ScheduleFormPage = memo(() => {
         </div >
     );
     return (
-        <div className='mb-10'>
+        <div className='mb-10 max-h-screen'>
             {renderInputs()}
             {renderButtons()}
             {isOpen && (

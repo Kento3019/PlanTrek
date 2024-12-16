@@ -48,7 +48,7 @@ const Calendar = forwardRef<any, CalendarProps>(({ events, onEventClick }, ref) 
         return <>{dayNumberText.replace('日', '')}</>;
     };
     return (
-        <div className="mt-3 p-1 ">
+        <div className="">
             <FullCalendar
                 plugins={[dayGridPlugin, interactionPlugin]}
                 initialView="dayGridMonth"
@@ -57,11 +57,16 @@ const Calendar = forwardRef<any, CalendarProps>(({ events, onEventClick }, ref) 
                 events={events}
                 eventContent={renderEventContent}
                 eventClick={onEventClick}
-                headerToolbar={{ left: 'title', center: '', right: 'prev next' }}
+                headerToolbar={{
+                    left: 'title', // 左側に「前月」「次月」「今日」を配置
+                    center: 'prev,next', // タイトルは中央
+                    right: '', // 右側には何も表示しない
+                }}
                 dayCellContent={renderDayCell}
-                aspectRatio={1.1}
+                aspectRatio={1.4}
             />
         </div>
+
     );
 });
 

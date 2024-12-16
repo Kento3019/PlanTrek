@@ -13,7 +13,7 @@ import { useTransactions } from '../provider/ExpenseTransactionProvider';
 import { useGroup } from '../provider/GroupProvider';
 import { NAME_AMOUNT, NAME_CONTENT, NAME_INVOLVES, NAME_PAYER } from '../types/FieldName';
 
-const PLACEHOLDER_CONTENT = "タイトル";
+const PLACEHOLDER_CONTENT = "イベント代";
 const PLACEHOLDER_AMOUNT = '5000'
 
 const BUTTON_REGISTER = "登録";
@@ -105,7 +105,7 @@ export const TransactionFormPage = memo(() => {
                             name={NAME_CONTENT} // NAME_CONTENTを設定
                             value={formData.content}
                             onChange={handleFormFieldChange}
-                            className="p-3 w-full mb-2"
+                            className="px-2 w-full mb-2"
                         />
                     </div>
                     <div className='px-2 py-2 flex flex-row items-baseline'>

@@ -22,7 +22,7 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({ title, children, i
     return (
         <details className="group" open={isOpen}>
             <summary
-                className={`mb-2 flex cursor-pointer list-none items-center justify-between py-2 font-medium
+                className={`mt-2 flex cursor-pointer list-none items-center justify-between font-medium
                     ${!isOpen && 'border-b border-gray-100'} // アコーディオンが閉じているときに下線を表示
                     group-open:border-b-0`
                 }>

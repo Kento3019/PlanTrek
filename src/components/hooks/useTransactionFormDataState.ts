@@ -59,12 +59,12 @@ export const useTransactionFormDataState = () => {
 
     const validateForm = useCallback((transaction: ExpenseTransaction) => {
         if (transaction.content === "") {
-            alert("タイトルを入力してください");
+            alert("割り勘の対象を入力してください");
             return false;
-        } else if (Number(transaction.amount) < 0) {
+        } else if (transaction.amount <= 0) {
             alert("金額は０より大きい数値を入力してください")
             return false;
-        } else if (Number(transaction.involves.length) < 0) {
+        } else if (Number(transaction.involves.length) <= 0) {
             alert("割り勘する人は1人以上選択してください")
             return false;
         } else if (!transaction.payer) {

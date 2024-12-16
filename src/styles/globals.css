@@ -7,6 +7,7 @@ html {
     "Hiragino Sans", Meiryo, sans-serif;
   --tw-bg-opacity: 1;
   background-color: rgb(226 232 240 / var(--tw-bg-opacity));
+  overscroll-behavior: contain;
 }
 .fc .fc-toolbar.fc-header-toolbar {
   margin-bottom: 0;
@@ -71,8 +72,24 @@ html {
 .fc {
   z-index: 1; /* モーダルの背景より後ろに配置 */
 }
-.fc-scroller {
-  overflow: hidden !important;
+/* Calendar.css */
+.fc .fc-header-toolbar {
+  display: flex;
+  justify-content: flex-start; /* 左寄せ */
+  width: 100%;
+}
+
+.fc .fc-button-group {
+  margin-right: 10px; /* ボタン間にスペースを追加 */
+}
+
+.fc .fc-button-prev .fc .fc-button-next {
+  margin-left: 5px; /* 左のボタンに少しスペース */
+}
+
+.fc .fc-title {
+  flex-grow: 1; /* タイトルを中央に保ちながら、ボタンを左に配置 */
+  text-align: left; /* タイトルを左寄せ */
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator,

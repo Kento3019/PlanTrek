@@ -50,34 +50,36 @@ export const UserGroupPage = () => {
         }
     }
     return (
-        <Loading loading={loading}>
-            <div className='py-4'>
-                <LabeledInputButton
-                    type="text"
-                    label="メンバー"
-                    placeholder='ゆうた'
-                    value={user.userName}
-                    onChange={handleChange}
-                    onClick={addUser}
-                >
-                    追加
-                </LabeledInputButton>
-                <div className='flex flex-grow flex-wrap'>
-                    {users.map((user) => (
-                        <PillWithButton key={user.userName} label={user.userName} onClick={() => deleteUser(user)} ><CrossIcon className='' /></PillWithButton>
-                    ))}
-                </div>
-                {window.location.pathname.includes("user") ? (
-                    <div>
-                        <PositiveButton onClick={handleClick} className="w-full rounded-md ">更新する</PositiveButton>
-                        <NegativeButton onClick={() => navigate(-1)} className="mt-3 w-full">戻る</NegativeButton>
+        <div className=''>
+            <Loading loading={loading}>
+                <div className='py-4'>
+                    <LabeledInputButton
+                        type="text"
+                        label="メンバー"
+                        placeholder='ゆうた'
+                        value={user.userName}
+                        onChange={handleChange}
+                        onClick={addUser}
+                    >
+                        追加
+                    </LabeledInputButton>
+                    <div className='flex flex-grow flex-wrap'>
+                        {users.map((user) => (
+                            <PillWithButton key={user.userName} label={user.userName} onClick={() => deleteUser(user)} ><CrossIcon className='' /></PillWithButton>
+                        ))}
                     </div>
-                ) : (
-                    <PositiveButton onClick={handleClick} className="w-full rounded-md ">グループを作成</PositiveButton>
+                    {window.location.pathname.includes("user") ? (
+                        <div>
+                            <PositiveButton onClick={handleClick} className="w-full rounded-md ">更新する</PositiveButton>
+                            <NegativeButton onClick={() => navigate(-1)} className="mt-3 w-full">戻る</NegativeButton>
+                        </div>
+                    ) : (
+                        <PositiveButton onClick={handleClick} className="w-full rounded-md ">グループを作成</PositiveButton>
 
-                )
-                }
-            </div>
-        </Loading>
+                    )
+                    }
+                </div>
+            </Loading>
+        </div>
     );
 }

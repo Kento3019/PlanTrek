@@ -55,10 +55,8 @@ export const SchedulePage = () => {
         navigate(`./form`);
     };
 
-    console.log(schedules.length);
-
     return (
-        <>
+        <div className='max-h-full  flex flex-col'>
             <Loading loading={loading}>
                 <ListNotFound
                     existing={schedules.length === 0}
@@ -67,28 +65,30 @@ export const SchedulePage = () => {
                     msgStr='「スケジュールを追加する」からメンバー間の予定を登録しましょう'
                 >
                     <>
-                        <div className='hidden sm:flex justify-start mt-2'>
-                            <PositiveButton
-                                className='px-2 rounded-md'
-                                onClick={() => navigateToForm(undefined)}
-                            >
-                                スケジュールを追加する
-                            </PositiveButton>
+                        <div className=''>
+                            <div className='hidden sm:flex justify-start mt-2'>
+                                <PositiveButton
+                                    className='px-2 rounded-md'
+                                    onClick={() => navigateToForm(undefined)}
+                                >
+                                    スケジュールを追加する
+                                </PositiveButton>
+                            </div>
+                            <div className='shadow-sm'>
+                                <Calendar
+                                    events={schedules.map((schedule) => ({
+                                        id: schedule.sid,
+                                        title: schedule.content,
+                                        start: schedule.allDay ? schedule.date.start : new Date(`${schedule.date.start}T${schedule.time.start}:00`).toISOString(),
+                                        end: schedule.allDay ? schedule.date.end : new Date(`${schedule.date.end}T${schedule.time.end}:00`).toISOString(),
+                                        category: schedule.category.cid, description: "",
+                                        allDay: schedule.allDay
+                                    }))}
+                                    onEventClick={handleEventClick}
+                                />
+                            </div>
                         </div>
-                        <div className='shadow-sm pb-4'>
-                            <Calendar
-                                events={schedules.map((schedule) => ({
-                                    id: schedule.sid,
-                                    title: schedule.content,
-                                    start: schedule.allDay ? schedule.date.start : new Date(`${schedule.date.start}T${schedule.time.start}:00`).toISOString(),
-                                    end: schedule.allDay ? schedule.date.end : new Date(`${schedule.date.end}T${schedule.time.end}:00`).toISOString(),
-                                    category: schedule.category.cid, description: "",
-                                    allDay: schedule.allDay
-                                }))}
-                                onEventClick={handleEventClick}
-                            />
-                        </div>
-                        <div className={`py-4 ${schedules.length > 20 ? 'overflow-y-scroll max-h-96' : ''}`}>
+                        <div className={`flex-1  overflow-y-auto`}>
                             <EventInfoTable navigate={navigateToForm} />
                         </div>
                         <FAB isOpenFAB={isOpenFAB} onClose={toggleFAB}>
@@ -107,6 +107,6 @@ export const SchedulePage = () => {
                     </>
                 </ListNotFound>
             </Loading>
-        </>
+        </div>
     );
 };
