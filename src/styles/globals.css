@@ -91,6 +91,10 @@ html {
   flex-grow: 1; /* タイトルを中央に保ちながら、ボタンを左に配置 */
   text-align: left; /* タイトルを左寄せ */
 }
+/* イベント自体のスタイル */
+.fc-event {
+  margin-bottom: 5px; /* イベント内の余白を少し増やす */
+}
 
 input[type="date"]::-webkit-calendar-picker-indicator,
 input[type="time"]::-webkit-calendar-picker-indicator {

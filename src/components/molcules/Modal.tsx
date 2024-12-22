@@ -1,43 +1,40 @@
+import React, { memo, ReactNode, CSSProperties } from 'react';
 
-
-import React, { memo, ReactNode, useEffect } from 'react';
-
-type Props = {
+type ModalProps = {
     isOpen: boolean;
+    onClose: () => void;
     children: ReactNode;
+    header?: ReactNode;
+    overlayClassName?: string;
+    contentClassName?: string;
+    style?: CSSProperties;
 };
 
-
-
-export const Modal = memo(({ isOpen, children }: Props) => {
-    useEffect(() => {
-        if (isOpen) {
-            // モーダルが開いたときにスクロールを無効化
-            document.body.style.overflow = 'hidden';
-        } else {
-            // モーダルが閉じたときにスクロールを復元
-            document.body.style.overflow = '';
-        }
-
-        // コンポーネントがアンマウントされたときのクリーンアップ
-        return () => {
-            document.body.style.overflow = '';
-        };
-    }, [isOpen]);
-
-    return (
-        <div
-            className={`fixed sm:absolute z-50 inset-0 bg-black bg-opacity-50 flex items-center justify-center transition-opacity duration-300 ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
-        >
+export const Modal = memo(
+    ({
+        isOpen,
+        onClose,
+        children,
+        header,
+        overlayClassName = '',
+        contentClassName = '',
+        style = {}
+    }: ModalProps) => {
+        return (
             <div
-                className="w-full flex flex-col bg-white rounded-xl shadow-2xl transform transition-transform duration-300 p-4"
-                style={{
-                    maxWidth: '90%', // コンテンツエリアの90%に調整
-                }}
-                onClick={(e) => e.stopPropagation()}
+                className={`${overlayClassName} absolute  z-50 inset-0 bg-black bg-opacity-50 flex justify-center transition-opacity duration-300 ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
+                    }`}
+                onClick={onClose}
             >
-                {children}
+                <div
+                    className={`transform transition-transform duration-300 ${contentClassName}`}
+                    style={style}
+                    onClick={(e) => e.stopPropagation()}
+                >
+                    {header}
+                    {children}
+                </div>
             </div>
-        </div>
-    );
-});
+        );
+    }
+);

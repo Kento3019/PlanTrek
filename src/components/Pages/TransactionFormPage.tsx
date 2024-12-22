@@ -8,10 +8,10 @@ import { SelectBox } from '../atoms/SelextBox';
 import { useTransactionFormDataState } from '../hooks/useTransactionFormDataState';
 import { useTransactionsManager } from '../hooks/useTransactionsManager';
 import { LabeledCheckBox } from '../molcules/LabeledCheckBox';
-import { ConfimationModal } from '../organisms/ConfimationModal';
 import { useTransactions } from '../provider/ExpenseTransactionProvider';
 import { useGroup } from '../provider/GroupProvider';
 import { NAME_AMOUNT, NAME_CONTENT, NAME_INVOLVES, NAME_PAYER } from '../types/FieldName';
+import { ConfirmationModal } from '../organisms/ConfimationModal';
 
 const PLACEHOLDER_CONTENT = "イベント代";
 const PLACEHOLDER_AMOUNT = '5000'
@@ -154,12 +154,12 @@ export const TransactionFormPage = memo(() => {
             {renderInputs()}
             {renderButtons()}
             {isOpen && (
-                < ConfimationModal
+                < ConfirmationModal
                     label="削除します。よろしいですか？"
-                    openButtonlabel='OK'
-                    closeButtonlabel='Cancel'
+                    confirmButtonLabel='OK'
+                    cancelButtonLabel='Cancel'
                     isOpen={isOpen}
-                    handleModalAction={() => { navigate(-1); deleteTransaction(formData) }}
+                    onConfirm={() => { navigate(-1); deleteTransaction(formData) }}
                     onClose={() => { setIsOpen(false) }}
                 />
             )}

@@ -9,8 +9,9 @@ export const HomePage: React.FC = () => {
     const navigate = useNavigate();
 
     const handleClick = () => {
-        navigate(`../new`);
-
+        // navigate(`../new`);
+        const uuid = window.crypto.randomUUID();
+        navigate(`../${uuid}/group`);
     };
 
     return (

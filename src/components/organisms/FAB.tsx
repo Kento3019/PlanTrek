@@ -13,7 +13,7 @@ export const FAB = ({ children, isOpenFAB, onClose }: Props) => {
 
     return (
         <>
-            <div className="block sm:hidden">
+            <div className="block">
                 {isOpenFAB ? (
                     <>
                         <div

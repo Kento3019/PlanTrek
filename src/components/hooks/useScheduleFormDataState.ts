@@ -10,7 +10,7 @@ import { Category } from "../types/Category";
 
 
 export const useScheduleFormDataState = () => {
-    const { setSelectedSchedule, schedules } = useSchedules();
+    const { schedules } = useSchedules();
     const { createSchedule, readSchedule, updateSchedule } = useScheduleManager();
     const navigate = useNavigate();
     const { categories } = useCategories();
@@ -119,7 +119,7 @@ export const useScheduleFormDataState = () => {
         return true;
     }, [navigate]);
 
-    const handleFieldRegister = useCallback(async (schedule: Schedule) => {
+    const handleFieldRegister = useCallback(async (schedule: Schedule, handleClick: () => void) => {
         if (!validateForm(schedule)) {
             return;
         }
@@ -140,11 +140,9 @@ export const useScheduleFormDataState = () => {
         } catch (error) {
             console.error("Error handling modal action: ", error);
         } finally {
-            navigate(-1);
-            setSelectedSchedule(undefined);
-
+            handleClick();
         }
-    }, [createSchedule, readSchedule, updateSchedule, setSelectedSchedule, navigate, schedules, validateForm]);
+    }, [createSchedule, readSchedule, updateSchedule, schedules, validateForm]);
 
     return {
         formData,

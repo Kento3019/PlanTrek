@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Column, Table } from '../molcules/Table';
 import { useSchedules } from '../provider/SchedulesProvider';
 import { Schedule } from '../types/Schedule';
-import { ConfimationModal } from './ConfimationModal';
 import CircleIcon from '../image/CircleIcon';
 
 type ScheduleColumn = {
@@ -16,12 +15,13 @@ const tableColumns: Column<ScheduleColumn>[] = [
 ];
 
 type Props = {
-    navigate: (Schedule: Schedule) => void;
+    onOpen: () => void;
 };
 
-export const EventInfoTable: React.FC<Props> = ({ navigate }) => {
+export const EventInfoTable: React.FC<Props> = ({ onOpen }: Props) => {
     const { schedules } = useSchedules();
     const [sortedSchedules, setSortedSchedules] = useState<Schedule[]>([]);  // 並び替えたトランザクションを保存
+    const { setSelectedSchedule } = useSchedules();
 
     useEffect(() => {
         const sorted = [...schedules].sort((a, b) => {
@@ -41,19 +41,6 @@ export const EventInfoTable: React.FC<Props> = ({ navigate }) => {
         setSortedSchedules(sorted);  // 並び替えたデータをセット
     }, [schedules]);
 
-
-
-    const [isOpen, setIsOpen] = useState(false);
-    const [selectedURL,] = useState<string>('');
-
-    const handleModalAction = () => {
-        // OKボタンがクリックされた場合に新規タブで遷移
-        if (selectedURL) {
-            window.open(selectedURL, '_blank');
-        }
-        setIsOpen(false);  // モーダルを閉じる
-    };
-
     return (
         <>
             <Table
@@ -62,7 +49,7 @@ export const EventInfoTable: React.FC<Props> = ({ navigate }) => {
                     schedule: (
                         <div
                             className="text-left cursor-pointer"
-                            onClick={() => navigate(schedule)} // リスト全体で画面遷移
+                            onClick={() => { setSelectedSchedule(schedule); onOpen() }}
                         >
                             <div className="flex flex-row max-w-md">
                                 {schedule.date.start !== schedule.date.end ? (
@@ -84,7 +71,7 @@ export const EventInfoTable: React.FC<Props> = ({ navigate }) => {
                                     </>
                                 )}
                             </div>
-                            <div className="flex flex-row flex-wrap">
+                            <div className="flex flex-row flex-wrap items-center">
                                 <div className="flex flex-row mr-1.5">
                                     <CircleIcon className={`${schedule.category.categoryColor.text}`} />
                                 </div>
@@ -107,18 +94,6 @@ export const EventInfoTable: React.FC<Props> = ({ navigate }) => {
                     ),
                 }))}
             />
-            {
-                isOpen && (
-                    < ConfimationModal
-                        label="外部リンクに移動します"
-                        openButtonlabel='OK'
-                        closeButtonlabel='Cancel'
-                        isOpen={isOpen}
-                        handleModalAction={handleModalAction}
-                        onClose={() => { setIsOpen(false) }}
-                    />
-                )
-            }
         </>
-    );
+    )
 }

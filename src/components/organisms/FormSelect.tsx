@@ -33,7 +33,7 @@ export const FormSelect = ({ categories, value, onChange }: Props) => {
         option: (provided: any, state: any) => ({
             ...provided,
             backgroundColor: state.isSelected || state.isFocused
-                ? "#f0f0f0" // 選択中またはホバー中の背景色を薄いグレー
+                ? "" // 選択中またはホバー中の背景色を薄いグレー
                 : "white",
             color: "#333", // 文字色を濃いグレー
             padding: 10,
@@ -42,7 +42,7 @@ export const FormSelect = ({ categories, value, onChange }: Props) => {
         }),
         control: (provided: any) => ({
             ...provided,
-            backgroundColor: "#f5f5f6",
+            backgroundColor: "none",
             border: "none", // 枠線を消す
             borderBottom: "1px solid #ddd", // 下線を薄いグレーに設定
             borderRadius: 0, // 角丸をなくす

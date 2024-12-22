@@ -3,32 +3,42 @@ import { Modal } from '../molcules/Modal';
 import { PositiveButton } from '../atoms/PositiveButton';
 import { NegativeButton } from '../atoms/NegativeButton';
 
-type Props = {
-    isOpen?: boolean;
+type ConfirmationModalProps = {
+    isOpen: boolean;
     onClose: () => void;
-    handleModalAction: () => void;
+    onConfirm: () => void;
     label: string;
-    openButtonlabel: string;
-    closeButtonlabel?: string;
-}
+    confirmButtonLabel: string;
+    cancelButtonLabel?: string;
+};
 
-export const ConfimationModal = ({ label, openButtonlabel, closeButtonlabel, isOpen = false, onClose, handleModalAction }: Props) => {
+export const ConfirmationModal = ({
+    isOpen,
+    onClose,
+    onConfirm,
+    label,
+    confirmButtonLabel,
+    cancelButtonLabel,
+}: ConfirmationModalProps) => {
     return (
-        <Modal isOpen={isOpen}>
-            <span className="mb-4 text-center">{label}</span>
-            <div className="flex flex-row">
-                <PositiveButton
-                    onClick={handleModalAction}
-                    className='flex-1 m-1 px-2 rounded-md '>
-                    {openButtonlabel}
-                </PositiveButton>
-                {closeButtonlabel && (
-                    <NegativeButton
-                        onClick={onClose}
-                        className='flex-1 m-1'>
-                        {closeButtonlabel}
+        <Modal
+            isOpen={isOpen}
+            onClose={onClose}
+            overlayClassName="flex items-center justify-center"
+            contentClassName="bg-white p-6 rounded-lg shadow-xl max-w-md w-full"
+        >
+            <div className="text-center mb-4">
+                <p>{label}</p>
+            </div>
+            <div className="flex justify-end space-x-4">
+                {cancelButtonLabel && (
+                    <NegativeButton onClick={onClose} className="px-4 py-2">
+                        {cancelButtonLabel}
                     </NegativeButton>
                 )}
+                <PositiveButton onClick={onConfirm} className="px-4 py-2">
+                    {confirmButtonLabel}
+                </PositiveButton>
             </div>
         </Modal>
     );

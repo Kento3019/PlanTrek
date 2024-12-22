@@ -12,10 +12,10 @@ import MapPinIcon from '../image/mapPinIcon';
 import { useCategories } from '../provider/CategoryProvider';
 import { Button } from '../atoms/Button';
 import { useScheduleManager } from '../hooks/useScheduleManager';
-import { ConfimationModal } from '../organisms/ConfimationModal';
 import { useScheduleFormDataState } from '../hooks/useScheduleFormDataState';
 import { FormSelect } from '../organisms/FormSelect';
 import Switch from '../molcules/Switch';
+import { ConfirmationModal } from '../organisms/ConfimationModal';
 
 const PLACEHOLDER_CONTENT = "タイトル";
 const PLACEHOLDER_CONTENTURL = "場所  https://example.co.jp";
@@ -25,7 +25,10 @@ const BUTTON_REGISTER = "登録";
 const BUTTON_CLOSE = "閉じる";
 const BUTTON_DELETE = "削除";
 
-export const ScheduleFormPage = memo(() => {
+type Props = {
+    onClose?: () => void;
+}
+export const ScheduleFormPage = memo(({ onClose }: Props) => {
     const { setSelectedSchedule, selectedSchedule } = useSchedules();
     const { formData, updateFormData, handleFormFieldChange, handleFieldRegister, handleOptionChange } = useScheduleFormDataState();
     const navigate = useNavigate();
@@ -38,7 +41,11 @@ export const ScheduleFormPage = memo(() => {
     }, [updateFormData, selectedSchedule]);
 
     const handleClick = () => {
-        navigate(-1)
+        if (onClose) {
+            onClose();
+        } else {
+            navigate(-1);
+        }
         setSelectedSchedule(undefined);
     }
     const renderInputs = () => (
@@ -180,7 +187,7 @@ export const ScheduleFormPage = memo(() => {
     const renderButtons = () => (
         <div className="flex flex-col space-y-3 mt-5">
             <PositiveButton
-                onClick={() => handleFieldRegister(formData)}
+                onClick={() => handleFieldRegister(formData, () => handleClick())}
                 className="py-2 px-6 rounded-md "
             >
                 {BUTTON_REGISTER}
@@ -206,17 +213,16 @@ export const ScheduleFormPage = memo(() => {
             {renderInputs()}
             {renderButtons()}
             {isOpen && (
-                < ConfimationModal
+                < ConfirmationModal
                     label="削除します。よろしいですか？"
-                    openButtonlabel='OK'
-                    closeButtonlabel='Cancel'
+                    confirmButtonLabel='OK'
+                    cancelButtonLabel='Cancel'
                     isOpen={isOpen}
-                    handleModalAction={() => { navigate(-1); deleteSchedule(formData) }}
+                    onConfirm={() => { handleClick(); deleteSchedule(formData) }}
                     onClose={() => { setIsOpen(false) }}
                 />
             )}
         </div>
-
     );
 
 });

@@ -1,10 +1,12 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useRef } from 'react';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import jaLocale from '@fullcalendar/core/locales/ja';
 import { EventClickArg } from '@fullcalendar/core';
 import { useCategories } from '../provider/CategoryProvider';
+import DoubleLeftArrow from '../image/DoubleLeftArrow';
+import DoubleRightArrow from '../image/DoubleRightArrow';
 
 interface CalendarProps {
     events: Array<{
@@ -15,13 +17,16 @@ interface CalendarProps {
         description: string;
         category: string;
     }>;
+    initialDate: Date;
+    datesSet: (dateInfo: { start: Date; end: Date }) => void;
     onEventClick: ((arg: EventClickArg) => void) | undefined;
 }
 
 // Calendar コンポーネントを forwardRef でラップ
-const Calendar = forwardRef<any, CalendarProps>(({ events, onEventClick }, ref) => {
-    // イベントの表示内容をカスタマイズ
+const Calendar = forwardRef<any, CalendarProps>(({ events, onEventClick, initialDate, datesSet }, ref) => {
+    const calendarRef = useRef<any>(null);
 
+    // イベントの表示内容をカスタマイズ
     const { categories } = useCategories();
 
     const renderEventContent = (eventInfo: any) => {
@@ -47,9 +52,23 @@ const Calendar = forwardRef<any, CalendarProps>(({ events, onEventClick }, ref) 
         const { dayNumberText } = e;
         return <>{dayNumberText.replace('日', '')}</>;
     };
+
+    const handlePrevMonth = () => {
+        if (calendarRef.current) {
+            calendarRef.current.getApi().prev(); // 前月に移動
+        }
+    };
+
+    const handleNextMonth = () => {
+        if (calendarRef.current) {
+            calendarRef.current.getApi().next(); // 次月に移動
+        }
+    };
+
     return (
-        <div className="">
+        <div className="relative">
             <FullCalendar
+                ref={calendarRef}
                 plugins={[dayGridPlugin, interactionPlugin]}
                 initialView="dayGridMonth"
                 locales={[jaLocale]}
@@ -57,16 +76,32 @@ const Calendar = forwardRef<any, CalendarProps>(({ events, onEventClick }, ref) 
                 events={events}
                 eventContent={renderEventContent}
                 eventClick={onEventClick}
+                initialDate={initialDate}
+                datesSet={(dateInfo) => datesSet({ start: dateInfo.start, end: dateInfo.end })}
                 headerToolbar={{
                     left: 'title', // 左側に「前月」「次月」「今日」を配置
-                    center: 'prev,next', // タイトルは中央
+                    center: '', // タイトルは中央
                     right: '', // 右側には何も表示しない
                 }}
                 dayCellContent={renderDayCell}
                 aspectRatio={1.4}
             />
-        </div>
 
+            {/* FABボタン：中央配置 */}
+            <button
+                onClick={handlePrevMonth}
+                className="pl-1 z-10 absolute left-0 top-1/2  bg-black bg-opacity-20 hover:bg-opacity-60 text-white w-5 h-12 flex items-center justify-center shadow-lg focus:outline-none"
+            >
+                <DoubleLeftArrow />
+            </button>
+
+            <button
+                onClick={handleNextMonth}
+                className="pr-1 z-10 absolute right-0 top-1/2  bg-black bg-opacity-20 hover:bg-opacity-60 text-white w-5 h-12 flex items-center justify-center shadow-lg focus:outline-none"
+            >
+                <DoubleRightArrow />
+            </button>
+        </div>
     );
 });
 

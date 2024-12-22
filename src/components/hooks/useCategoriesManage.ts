@@ -9,7 +9,7 @@ import { initCategories, useCategories } from "../provider/CategoryProvider";
 export const useCategoriesManager = () => {
     const { createDocument, readDocuments, updateDocument } = useFirestore<Category>();
     const { uuid } = useParams();
-    const { categories, setCategories } = useCategories();
+    const { setCategories } = useCategories();
 
     const createCategory = (uuid: string, category: Category) => {
         const collectionRef = collection(db, "users", uuid, "categories").withConverter(createConverter<Category>());
@@ -29,12 +29,18 @@ export const useCategoriesManager = () => {
     }
 
     const readCategories = async (): Promise<Category[]> => {
-        if (!(categories.length > 0)) {
-            createCategories(uuid!, initCategories);
-        }
+
         const collectionRef = collection(db, "users", uuid!, "categories").withConverter(createConverter<Category>());
         const result = await readDocuments(collectionRef);
-        setCategories(result);
+
+        if ((result.length > 0)) {
+            setCategories(result);
+        } else {
+            createCategories(uuid!, initCategories);
+            setCategories(initCategories);
+        }
+
+
 
         return result;
     }

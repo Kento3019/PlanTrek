@@ -43,14 +43,12 @@ export const HeaderTemplate = memo(() => {
                             <div className="flex items-center justify-end space-x-2 mt-1">
                                 <button
                                     className="text-sm font-semibold text-white transition-all"
-                                    onClick={handleHeadarDisplay} // ヘッダー表示/非表示の切り替え
+                                    onClick={handleHeadarDisplay}
                                 >
                                     <svg className="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <svg className="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            {/* 左に90度回転した2重矢印 */}
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 14l5-5 5 5" />
                                             <path className="" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 10l5-5 5 5" />
-
                                         </svg>
                                     </svg>
                                 </button>
@@ -68,7 +66,7 @@ export const HeaderTemplate = memo(() => {
                                 </button>
                                 <nav className="mt-16 px-4">
                                     <ul className="space-y-4">
-                                        <li>
+                                        {/* <li>
                                             {isSchedulePage ? (
                                                 <button
                                                     className="block w-full font-semibold text-left text-lg text-white hover:border hover:border-white transition-all p-2"
@@ -84,15 +82,15 @@ export const HeaderTemplate = memo(() => {
                                                     予定追加
                                                 </button>
                                             )}
-                                        </li>
-                                        <li>
+                                        </li> */}
+                                        {/* <li>
                                             <button
                                                 className="block w-full font-semibold text-left text-lg text-white hover:border hover:border-white transition-all p-2"
                                                 onClick={() => handleNavigation(`../${uuid}/user`)}
                                             >
                                                 ユーザ更新
                                             </button>
-                                        </li>
+                                        </li> */}
                                         <li>
                                             <button
                                                 className="block w-full font-semibold text-left text-lg text-white hover:border hover:border-white transition-all p-2"
@@ -110,7 +108,7 @@ export const HeaderTemplate = memo(() => {
                             <h1 className="ml-2 text-3xl font-bold tracking-tight">{HEADER_NAME}</h1>
                             <div className="items-center space-x-6 mr-4">
                                 <nav className="flex space-x-4">
-                                    {isSchedulePage ? (
+                                    {/* {isSchedulePage ? (
                                         <button
                                             className="text-sm font-semibold text-white hover:border-b hover:border-white transition-all"
                                             onClick={() => handleNavigation(`../${uuid}/transaction`)}
@@ -124,13 +122,13 @@ export const HeaderTemplate = memo(() => {
                                         >
                                             予定追加
                                         </button>
-                                    )}
-                                    < button
+                                    )} */}
+                                    {/* < button
                                         className="text-sm font-semibold text-white hover:border-b hover:border-white transition-all"
                                         onClick={() => handleNavigation(`../${uuid}/user`)}
                                     >
                                         ユーザ設定
-                                    </button>
+                                    </button> */}
                                     <button
                                         className="text-sm font-semibold text-white hover:border-b hover:border-white transition-all"
                                         onClick={() => handleNavigation(`../${uuid}/schedule/category`)}
@@ -148,7 +146,7 @@ export const HeaderTemplate = memo(() => {
             </header >
         ) : (
             <button
-                className="fixed right-2.5 bg-black bg-opacity-50 text-white w-10 h-10 flex items-center justify-center shadow-lg transition-opacity"
+                className="fixed right-2.5 bg-black bg-opacity-50 text-white w-10 h-8 flex items-center justify-center shadow-lg transition-opacity"
                 onClick={handleHeadarDisplay}
                 aria-label="Toggle header visibility"
             >
