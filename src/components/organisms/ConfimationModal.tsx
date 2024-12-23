@@ -30,15 +30,16 @@ export const ConfirmationModal = ({
             <div className="text-center mb-4">
                 <p>{label}</p>
             </div>
-            <div className="flex justify-end space-x-4">
+            <div className="flex flex-col sm:flex-row items-center justify-center">
+                <PositiveButton onClick={onConfirm} className="px-4 mx-2 mb-2  rounded-md w-full">
+                    {confirmButtonLabel}
+                </PositiveButton>
                 {cancelButtonLabel && (
-                    <NegativeButton onClick={onClose} className="px-4 py-2">
+                    <NegativeButton onClick={onClose} className="px-4 mx-2 mb-2 w-full">
                         {cancelButtonLabel}
                     </NegativeButton>
                 )}
-                <PositiveButton onClick={onConfirm} className="px-4 py-2">
-                    {confirmButtonLabel}
-                </PositiveButton>
+
             </div>
         </Modal>
     );
